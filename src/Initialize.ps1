@@ -1,4 +1,4 @@
-function Initialize-Map
+function Initialize-MapProject
 {
     [CmdletBinding()]
     param (
