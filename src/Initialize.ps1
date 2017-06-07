@@ -33,7 +33,7 @@ function Write-MapSkeleton {
 function Write-ProjectFile {
     $projectFile = "project.json"
     $projectObject = New-Object PSObject -Property @{
-        VmfName         = "$($MapName).vmf"
+        MapName = $MapName
     }
 
     $projectObject | ConvertTo-Json | Out-File $projectFile
