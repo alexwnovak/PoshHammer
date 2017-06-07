@@ -8,6 +8,8 @@ function Initialize-Map
 
     Write-DirectoryStructure
     Write-LevelSounds
+    Write-MapSkeleton
+    Write-ProjectFile
 }
 
 function Write-DirectoryStructure {
@@ -21,6 +23,20 @@ function Write-DirectoryStructure {
 function Write-LevelSounds {
     $levelSounds = "https://raw.githubusercontent.com/alexwnovak/PoshHammer/master/data/level_sounds.txt"
     Invoke-WebRequest $levelSounds -OutFile "Content\maps\$($MapName)_level_sounds.txt"
+}
+
+function Write-MapSkeleton {
+    $mapTemplate = "https://raw.githubusercontent.com/alexwnovak/PoshHammer/master/data/map_template.vmf"
+    Invoke-WebRequest $mapTemplate -OutFile "$($MapName).vmf"    
+}
+
+function Write-ProjectFile {
+    $projectFile = "project.json"
+    $projectObject = New-Object PSObject -Property @{
+        VmfName         = "$($MapName).vmf"
+    }
+
+    $projectObject | ConvertTo-Json | Out-File $projectFile
 }
 
 function New-Directory( $path ) {
