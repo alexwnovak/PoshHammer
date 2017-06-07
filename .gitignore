@@ -2,3 +2,6 @@
 Content/
 project.json
 *.vmf
+*.bsp
+*.log
+*.prt
