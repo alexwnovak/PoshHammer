@@ -6,6 +6,10 @@ function Initialize-Map
         [string] $MapName
     )
 
+    Write-DirectoryStructure
+}
+
+function Write-DirectoryStructure {
     New-Directory "Content"
     New-Directory "Content\maps"
     New-Directory "Content\materials\$($MapName)"
