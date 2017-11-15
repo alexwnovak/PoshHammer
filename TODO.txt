@@ -1,0 +1,54 @@
+PoshHammer TODO
+===============
+
+# Profiles Feature
+
+- Flesh out built-in profiles
+   * Add a "Fast" version to the project.json that uses different parameters to each tool
+   * This will enable the functions to be pluggable in their parameters
+   * Have the Build functions read from the project object that gets read in
+- Update Initialize-MapProject to generate these basic profiles
+   * "Default" will be just that, which is the typical Hammer build
+   * "Fast" will be the fast option from Hammer
+- Experiment with Cerberus and a "Full" profile
+   * This needs an additional custom "lights.rad" file
+
+# Build Duration Feature
+
+- Display the total build duration
+   * Should capture the start time before running any of the tools
+   * Capture the end time after all tools have run and display the total time
+   * The built-in build time isn't accurate for all tools and doesn't summarize
+
+# Customize Output
+
+- Capture the stream of output from each tool as a process
+- Filter it and output only the relevant things--ESPECIALLY ERRORS
+   * Leaks
+   * Displacement warnings
+- Ensure that the whole output is still written to the log file as usual
+- Introduce a project setting for BuildVerbosity
+   * Default is "Minimum," which is the filtered version here
+   * "Maximum" is the other option, which is the original, unfiltered output
+
+# Build Failure
+
+This allows customization on how builds could be proactively failed. The use case here
+is when you F7 your build in Hammer, and the first step finds a leak. You might as well
+stop since you're getting a bunk build. However, the tool keeps going and tries to do
+all the lighting calculations with totally wrong information.
+
+- Introduce a "FailBuildOnLeaks" flag that will abort the whole process if any leak is found
+- This should save loads of wasted time on bad builds
+
+# Build Sounds
+
+Another customization that plays sounds when builds complete, either successfully or not.
+This can be helpful when your long-running build completes without you realizing it, and
+you're off in another window.
+
+Sounds should be gentle, and clear of the positive or negative nature.
+
+- Has a sound for successful builds
+- Has a sound for failed builds
+- Has a project.json setting for playing sounds, defaulting to ON
